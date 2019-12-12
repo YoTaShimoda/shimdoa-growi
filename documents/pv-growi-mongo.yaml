@@ -1,0 +1,17 @@
+# Storege
+## for growi-app
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-growi-mongo
+  namespace: growi-shimoda
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: sc-growi-mongo
+  gcePersistentDisk:
+    pdName: disk-growi-mongo
+    fsType: ext4

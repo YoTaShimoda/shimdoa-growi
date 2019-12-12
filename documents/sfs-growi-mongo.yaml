@@ -1,0 +1,33 @@
+# Database(mongo)
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: growi-mongo
+  namespace: growi-shimoda
+  labels:
+    app: growi-mongo
+spec:
+  serviceName: "growi-mongo"
+  selector:
+    matchLabels:
+      app: growi-mongo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: growi-mongo
+      name: growi-mongo
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: growi-mongo
+        image: mongo:3.6
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: growi-mongodb-data
+          mountPath: /data/db
+      volumes:
+      - name: growi-mongodb-data
+        persistentVolumeClaim:
+          claimName: pvc-growi-mongo

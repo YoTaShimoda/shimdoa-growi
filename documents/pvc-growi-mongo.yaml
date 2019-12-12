@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-growi-mongo
+  namespace: shimoda-growi
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: sc-growi-mongo
+  resources:
+    requests:
+      storage: 10Gi
