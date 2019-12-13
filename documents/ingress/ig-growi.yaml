@@ -1,0 +1,10 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ig-growi
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: shimoda-growi
+spec:
+  backend:
+    serviceName: sv-growi-app
+    servicePort: 80 
