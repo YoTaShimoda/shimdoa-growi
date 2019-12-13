@@ -1,0 +1,21 @@
+# Elasticsearch
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: growi-elasticsearch
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: growi-elasticsearch
+    spec:
+      containers:
+      - name: growi-elasticsearch
+        image: elasticsearch:5.3-alpine
+        env:
+        - name: ES_JAVA_OPTS
+          value: "-Xms256m -Xmx256m"
+        command: ["sh", "-c", "./bin/elasticsearch-plugin list | grep -q analysis-kuromoji || ./bin/elasticsearch-plugin install analysis-kuromoji;./bin/elasticsearch-plugin list | grep -q analysis-icu || ./bin/elasticsearch-plugin install analysis-icu;/docker-entrypoint.sh elasticsearch"]
+        ports:
+        - containerPort: 9200
